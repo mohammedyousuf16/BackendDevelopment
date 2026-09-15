@@ -16,8 +16,14 @@
                 <!-- <p class="block w-1/4 rounded-md text-zinc-500 outline-none px-5 py-2 " type="text"  name="previous"> Change name from <%= filename %> </p> -->
                 <input class="block w-1/4 rounded-md text-zinc-500 outline-none px-5 py-2 bg-zinc-800" type="text" value="<%= filename %>" name="previous" readonly>
 
-                <input class="block w-1/4 rounded-md outline-none px-5 py-2 bg-zinc-800 mt-2" type="text" placeholder="New name" name="new">
-                <input class="mt-2 bg-yellow-600 px-5 py-2 rounded-md" type="submit" value="Update Name">
+                <input class="block w-1/4 rounded-md outline-none px-5 py-2 bg-zinc-800 mt-2" type="text" placeholder="New File name" name="new" required>
+
+                <textarea 
+  class="block w-full h-96 min-h-[300px] rounded-md outline-none px-5 py-4 bg-zinc-800 text-zinc-300 mt-2 resize-y" 
+  name="content" 
+  ><%= data %></textarea>
+
+                <input class="mt-2 bg-yellow-600 px-5 py-2 rounded-md" type="submit" value="Update Data">
             </form>
         </div>
     <script src="/javascript/script.js"</script></script>

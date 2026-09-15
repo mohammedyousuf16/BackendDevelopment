@@ -29,17 +29,28 @@ app.get("/files/:filename", function (req, res) {
 });
 
 app.get("/edit/:filename", function (req, res) {
-  res.render("edit", { filename: req.params.filename });
+  fs.readFile(
+    `./files/${req.params.filename}`,
+    "utf-8",
+    function (err, filedata) {
+      res.render("edit", { filename: req.params.filename, data: filedata });
+    },
+  );
 });
 
 app.post("/edit", function (req, res) {
-  fs.rename(
-    `./files/${req.body.previous}`,
-    `./files/${req.body.new.split(" ").join("")}.txt`,
-    function (err) {
-      res.redirect("/");
-    },
-  );
+  const oldPath = `./files/${req.body.previous}`;
+  const newPath = `./files/${req.body.new}.txt`;
+  fs.writeFile(oldPath, req.body.content, "utf-8", function (err) {
+    if (err) {
+      console.error(err);
+      return res.status(500).send("Error updating file content");
+    }
+  });
+
+  fs.rename(oldPath, newPath, function (err) {
+    res.redirect("/");
+  });
 });
 
 app.post("/create", (req, res) => {
